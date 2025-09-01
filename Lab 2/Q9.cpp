@@ -2,75 +2,70 @@
 using namespace std;
 
 int main() {
-    int rows, cols;
-
-    cout << "Enter number of rows: ";
-    cin >> rows;
-    cout << "Enter number of columns: ";
-    cin >> cols;
-
-    int** matrix = new int*[rows];
-    for (int i = 0; i < rows; i++) {
-        matrix[i] = new int[cols];
-    }
-
-    cout << "Enter elements of the matrix:" << endl;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            cin >> matrix[i][j];
-        }
-    }
-
-    cout << endl << "Matrix in normal form:" << endl;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    int nonZero = 0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (matrix[i][j] != 0) {
-                nonZero++;
-            }
-        }
-    }
-
-    int** compressed = new int*[nonZero];
-    for (int i = 0; i < nonZero; i++) {
-        compressed[i] = new int[3];
-    }
-
-    int k = 0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (matrix[i][j] != 0) {
-                compressed[k][0] = i;
-                compressed[k][1] = j;
-                compressed[k][2] = matrix[i][j];
-                k++;
-            }
-        }
-    }
-
-    cout << endl << "Matrix in compressed form (row, column, value):" << endl;
-    for (int i = 0; i < nonZero; i++) {
-        cout << compressed[i][0] << " " 
-             << compressed[i][1] << " " 
-             << compressed[i][2] << endl;
-    }
-
-    for (int i = 0; i < rows; i++) {
-        delete[] matrix[i];
-    }
-    delete[] matrix;
-
-    for (int i = 0; i < nonZero; i++) {
-        delete[] compressed[i];
-    }
-    delete[] compressed;
-
-    return 0;
+	int r,c;
+	cout<<"enter number of rows: ";
+	cin>>r;
+	cout<<"enter number of cols: ";
+	cin>>c;
+	
+	int **mat=new int*[r];
+	for(int i=0;i<r;i++){
+		mat[i]=new int[c];
+	}
+	
+	cout<<"enter elements of matrix:"<<endl;
+	for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+			cin>>mat[i][j];
+		}
+	}
+	
+	cout<<"matrix in normal form:"<<endl;
+	for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+			cout<<mat[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	
+	int nz=0;
+	for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+			if(mat[i][j]!=0){
+				nz++;
+			}
+		}
+	}
+	
+	int **comp=new int*[nz];
+	for(int i=0;i<nz;i++){
+		comp[i]=new int[3];
+	}
+	
+	int k=0;
+	for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+			if(mat[i][j]!=0){
+				comp[k][0]=i;
+				comp[k][1]=j;
+				comp[k][2]=mat[i][j];
+				k++;
+			}
+		}
+	}
+	
+	cout<<"matrix in compressed form (row col val):"<<endl;
+	for(int i=0;i<nz;i++){
+		cout<<comp[i][0]<<" "<<comp[i][1]<<" "<<comp[i][2]<<endl;
+	}
+	
+	for(int i=0;i<r;i++){
+		delete[] mat[i];
+	}
+	delete[] mat;
+	
+	for(int i=0;i<nz;i++){
+		delete[] comp[i];
+	}
+	delete[] comp;
 }
