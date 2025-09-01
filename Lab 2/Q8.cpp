@@ -2,56 +2,52 @@
 using namespace std;
 
 int main() {
-    int days, times;
-
-    cout << "Enter total days: ";
-    cin >> days;
-
-    cout << "Enter number of readings per day: ";
-    cin >> times;
-
-    int** temps = new int*[days];
-    for (int i = 0; i < days; i++) {
-        temps[i] = new int[times];
-    }
-
-    int* avg = new int[days];
-
-    for (int d = 0; d < days; d++) {
-        cout << "Day " << d + 1 << " readings:" << endl;
-        for (int t = 0; t < times; t++) {
-            cout << "  Reading " << t + 1 << ": ";
-            cin >> temps[d][t];
-        }
-    }
-
-    for (int d = 0; d < days; d++) {
-        int sum = 0;
-        for (int t = 0; t < times; t++) {
-            sum += temps[d][t];
-        }
-        avg[d] = sum / times;
-    }
-
-    int hottest = 0, coldest = 0;
-    for (int d = 1; d < days; d++) {
-        if (avg[d] > avg[hottest]) hottest = d;
-        if (avg[d] < avg[coldest]) coldest = d;
-    }
-
-    cout << endl << "Daily average temperatures:" << endl;
-    for (int d = 0; d < days; d++) {
-        cout << "Day " << d + 1 << ": " << avg[d] << endl;
-    }
-
-    cout << endl << "Hottest day: Day " << hottest + 1 << " (Avg: " << avg[hottest] << ")" << endl;
-    cout << "Coldest day: Day " << coldest + 1 << " (Avg: " << avg[coldest] << ")" << endl;
-
-    for (int i = 0; i < days; i++) {
-        delete[] temps[i];
-    }
-    delete[] temps;
-    delete[] avg;
-
-    return 0;
+	int d,t;
+	cout<<"enter total days: ";
+	cin>>d;
+	cout<<"enter number of readings per day: ";
+	cin>>t;
+	
+	int **temp=new int*[d];
+	for(int i=0;i<d;i++){
+		temp[i]=new int[t];
+	}
+	
+	int *avg=new int[d];
+	
+	for(int i=0;i<d;i++){
+		cout<<"day "<<i+1<<" readings:"<<endl;
+		for(int j=0;j<t;j++){
+			cout<<"reading "<<j+1<<": ";
+			cin>>temp[i][j];
+		}
+	}
+	
+	for(int i=0;i<d;i++){
+		int sum=0;
+		for(int j=0;j<t;j++){
+			sum+=temp[i][j];
+		}
+		avg[i]=sum/t;
+	}
+	
+	int hot=0,cold=0;
+	for(int i=1;i<d;i++){
+		if(avg[i]>avg[hot]) hot=i;
+		if(avg[i]<avg[cold]) cold=i;
+	}
+	
+	cout<<"daily avg temps:"<<endl;
+	for(int i=0;i<d;i++){
+		cout<<"day "<<i+1<<": "<<avg[i]<<endl;
+	}
+	
+	cout<<"hottest day: day "<<hot+1<<" (avg: "<<avg[hot]<<")"<<endl;
+	cout<<"coldest day: day "<<cold+1<<" (avg: "<<avg[cold]<<")"<<endl;
+	
+	for(int i=0;i<d;i++){
+		delete[] temp[i];
+	}
+	delete[] temp;
+	delete[] avg;
 }
