@@ -2,55 +2,50 @@
 using namespace std;
 
 int main() {
-    int categories;
-    cout << "Enter number of categories: ";
-    cin >> categories;
-
-    int* booksInCategory = new int[categories];
-    int** library = new int*[categories];
-
-    for (int i = 0; i < categories; i++) {
-        cout << "Enter number of books in category " << i + 1 << ": ";
-        cin >> booksInCategory[i];
-
-        library[i] = new int[booksInCategory[i]];
-
-        cout << "Enter book IDs for category " << i + 1 << ":" << endl;
-        for (int j = 0; j < booksInCategory[i]; j++) {
-            cin >> library[i][j];
-        }
-    }
-
-    int searchID;
-    cout << endl << "Enter book ID to search: ";
-    cin >> searchID;
-
-    bool found = false;
-    int categoryFound = -1;
-
-    for (int i = 0; i < categories; i++) {
-        for (int j = 0; j < booksInCategory[i]; j++) {
-            if (library[i][j] == searchID) {
-                found = true;
-                categoryFound = i;
-                break;
-            }
-        }
-        if (found) break;
-    }
-
-    if (found) {
-        cout << "Book ID " << searchID 
-             << " is available in category " << categoryFound + 1 << "." << endl;
-    } else {
-        cout << "Book ID " << searchID << " is not available in the library." << endl;
-    }
-
-    for (int i = 0; i < categories; i++) {
-        delete[] library[i];
-    }
-    delete[] library;
-    delete[] booksInCategory;
-
-    return 0;
+	int cat;
+	cout<<"enter number of categories: ";
+	cin>>cat;
+	
+	int *nbooks=new int[cat];
+	int **lib=new int*[cat];
+	
+	for(int i=0;i<cat;i++){
+		cout<<"enter number of books in category "<<i+1<<": ";
+		cin>>nbooks[i];
+		lib[i]=new int[nbooks[i]];
+		
+		cout<<"enter book ids for category "<<i+1<<":"<<endl;
+		for(int j=0;j<nbooks[i];j++){
+			cin>>lib[i][j];
+		}
+	}
+	
+	int sid;
+	cout<<"enter book id to search: ";
+	cin>>sid;
+	
+	bool found=false;
+	int c=-1;
+	for(int i=0;i<cat;i++){
+		for(int j=0;j<nbooks[i];j++){
+			if(lib[i][j]==sid){
+				found=true;
+				c=i;
+				break;
+			}
+		}
+		if(found) break;
+	}
+	
+	if(found){
+		cout<<"book id "<<sid<<" available in category "<<c+1<<endl;
+	}else{
+		cout<<"book id "<<sid<<" not available"<<endl;
+	}
+	
+	for(int i=0;i<cat;i++){
+		delete[] lib[i];
+	}
+	delete[] lib;
+	delete[] nbooks;
 }
