@@ -1,54 +1,53 @@
 #include <iostream>
 using namespace std;
 
-class SafePointer {
+class safepointer {
 private:
-    int* ptr;
-
+	int *p;
+	
 public:
-    SafePointer() {
-        ptr = new int;
-    }
-
-    ~SafePointer() {
-        delete ptr;
-    }
-
-    void setValue(int val) {
-        *ptr = val;
-    }
-
-    int getValue() {
-        return *ptr;
-    }
-
-    void release() {
-        delete ptr;
-        ptr = nullptr;
-    }
+	safepointer() {
+		p=new int;
+	}
+	
+	~safepointer() {
+		delete p;
+	}
+	
+	void setval(int v) {
+		*p=v;
+	}
+	
+	int getval() {
+		return *p;
+	}
+	
+	void release() {
+		delete p;
+		p=nullptr;
+	}
 };
 
 int main() {
-    int n = 5;
-    SafePointer* students = new SafePointer[n];
-
-    cout << "Enter marks " << endl;
-    for (int i = 0; i < n; i++) {
-        int mark;
-        cout << "Student " << i + 1 << ": ";
-        cin >> mark;
-        students[i].setValue(mark);
-    }
-
-    cout << endl << " Marks:" << endl;
-    for (int i = 0; i < n; i++) {
-        cout << "Student " << i + 1 << ": " << students[i].getValue() << endl;
-    }
-
-    for (int i = 0; i < n; i++) {
-        students[i].release();
-    }
-
-    delete[] students;
-    return 0;
+	int n=5;
+	safepointer *arr=new safepointer[n];
+	
+	cout<<"enter marks"<<endl;
+	for(int i=0;i<n;i++){
+		int m;
+		cout<<"student "<<i+1<<": ";
+		cin>>m;
+		arr[i].setval(m);
+	}
+	
+	cout<<"marks:"<<endl;
+	for(int i=0;i<n;i++){
+		cout<<"student "<<i+1<<": "<<arr[i].getval()<<endl;
+	}
+	
+	for(int i=0;i<n;i++){
+		arr[i].release();
+	}
+	
+	delete[] arr;
 }
