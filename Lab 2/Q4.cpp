@@ -2,75 +2,78 @@
 using namespace std;
 
 int main() {
-    int n;
-    cout << "Enter number of months to track: "<<endl;
-    cin >> n;
-
-    double* expenses = new double[n];
-
-    cout << "Enter expenses "<<endl;
-    for (int i = 0; i < n; i++) {
-        cout << "Month " << i + 1 << ": ";
-        cin >> expenses[i];
-    }
-
-    int choice;
-    do {
-        cout << "Expenses "<<endl;
-        cout << "1. Display Expenses"<<endl;
-        cout << "2. Show Total and Average"v;
-        cout << "3. Add More Months"v;
-        cout << "4. Exit"<<endl;
-        cout << "Enter choice: "<<endl;
-        cin >> choice;
-
-        switch (choice) {
-            case 1: {
-                cout << "Expenses List:"<<endl;
-                for (int i = 0; i < n; i++) {
-                    cout << "Month " << i + 1 << ": " << expenses[i] << endl;
-                }
-                break;
-            }
-
-            case 2: {
-                double total = 0;
-                for (int i = 0; i < n; i++) total += expenses[i];
-                cout << "\nTotal Expenses = " << total << endl;
-                cout << "Average Expenses = " << total / n << endl;
-                break;
-            }
-
-            case 3: {
-                int extra;
-                cout << "Enter number of extra months: ";
-                cin >> extra;
-
-                double* newArr = new double[n + extra];
-                for (int i = 0; i < n; i++) newArr[i] = expenses[i];
-
-                cout << "\nEnter expenses for new months:\n";
-                for (int i = n; i < n + extra; i++) {
-                    cout << "Month " << i + 1 << ": ";
-                    cin >> newArr[i];
-                }
-
-                delete[] expenses;
-                expenses = newArr;
-                n += extra;
-                break;
-            }
-
-            case 4:
-                cout << "Program ending"<<endl;
-                break;
-
-            default:
-                cout << "Invalid choice!"<<endl;
-        }
-
-    } while (choice != 4);
-
-    delete[] expenses;
-    return 0;
+	int n,choice;
+	
+	cout<<"enter number of months: "<<endl;
+	cin>>n;
+	
+	double *arr=new double[n];
+	
+	cout<<"enter expenses"<<endl;
+	for(int i=0;i<n;i++){
+		cout<<"month "<<i+1<<": ";
+		cin>>arr[i];
+	}
+	
+	do{
+		cout<<"expenses"<<endl;
+		cout<<"1. display expenses"<<endl;
+		cout<<"2. show total and average"<<endl;
+		cout<<"3. add more months"<<endl;
+		cout<<"4. exit"<<endl;
+		cout<<"enter choice:"<<endl;
+		cin>>choice;
+		
+		switch(choice){
+			case 1:{
+				cout<<"expenses list:"<<endl;
+				for(int i=0;i<n;i++){
+					cout<<"month "<<i+1<<": "<<arr[i]<<endl;
+				}
+				break;
+			}
+			
+			case 2:{
+				double total=0;
+				for(int i=0;i<n;i++){
+					total+=arr[i];
+				}
+				cout<<"total expenses = "<<total<<endl;
+				cout<<"average expenses = "<<total/n<<endl;
+				break;
+			}
+			
+			case 3:{
+				int extra;
+				cout<<"enter number of extra months: ";
+				cin>>extra;
+				
+				double *newarr=new double[n+extra];
+				for(int i=0;i<n;i++){
+					newarr[i]=arr[i];
+				}
+				
+				cout<<"enter expenses for new months:"<<endl;
+				for(int i=n;i<n+extra;i++){
+					cout<<"month "<<i+1<<": ";
+					cin>>newarr[i];
+				}
+				
+				delete[] arr;
+				arr=newarr;
+				n+=extra;
+				break;
+			}
+			
+			case 4:
+				cout<<"program ending"<<endl;
+				break;
+				
+			default:
+				cout<<"invalid choice"<<endl;
+		}
+		
+	}while(choice!=4);
+	
+	delete[] arr;
 }
